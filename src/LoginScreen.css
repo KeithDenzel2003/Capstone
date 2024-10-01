@@ -1,0 +1,170 @@
+/* Container styles */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  height: 100vh;
+  position: relative; /* Set the container to relative positioning */
+}
+
+/* Logo styles - move to the top left corner */
+.logo {
+  position: absolute; /* Position the logo absolutely */
+  top: 10px; /* Adjust the top distance as needed */
+  left: 20px; /* Adjust the left distance as needed */
+  width: 100px;
+  height: 100px;
+}
+
+/* Form container */
+.login-form {
+  width: 350px; /* Adjust width as needed */
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(226, 39, 39, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Header styles */
+.login-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #A47551;
+  padding-top: 100px;
+}
+
+/* Input styles */
+.login-input {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #ffffff; /* Set background color to white */
+  color: #000;
+}
+
+/* Row for checkbox and forgot password */
+.login-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Checkbox container */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-container input[type="checkbox"] {
+  appearance: none; /* Remove default styling */
+  width: 16px;
+  height: 16px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: #ffffff; /* Set background color to white */
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox-container input[type="checkbox"]:checked::before {
+  content: '✔';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000; /* Color of the checkmark */
+  font-size: 12px;
+}
+
+.checkbox-label {
+  margin-left: 5px;
+  color: #A8A7A7; /* Set text color to A8A7A7 */
+}
+
+.checkbox-label {
+  margin-left: 5px;
+
+}
+
+/* Forgot password link */
+.forgot-password {
+  color: #A8A7A7;
+  text-decoration: none;
+}
+
+/* Login button styles */
+.login-button {
+  width: 100%; /* Full width of the form */
+  padding: 10px;
+  background-color: #A0522D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.login-button:hover {
+  background-color: #8b4513;
+}
+
+/* "Or" text */
+.or {
+  text-align: center;
+  margin: 10px 0;
+  color: #A8A7A7;
+}
+
+/* Social login row */
+.social-login-row {
+  display: flex;
+  justify-content: center; /* Center the images */
+  align-items: center;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.social-login-row img {
+  width: 30px; /* Adjust size of social icons */
+  height: 30px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+/* Signup container */
+.signup-container {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center elements horizontally */
+  margin-top: 10px;
+}
+
+/* Styling for the "Don't have an account?" text */
+.signup-prompt {
+  color: #A8A7A7; /* Change color if needed */
+  margin-bottom: 5px; /* Add spacing between the text and the link */
+}
+
+/* Signup link styling */
+.signup-text {
+  color: #A0522D;
+  text-decoration: none;
+  font-weight: bold; /* Make the link bold */
+}

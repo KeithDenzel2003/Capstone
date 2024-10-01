@@ -1,0 +1,91 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
+
+.signupContainer {
+  width: 350px;
+  padding: 40px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #A3775E;
+}
+
+.inputContainer {
+  margin-bottom: 15px;
+  
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #888;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  color: black;
+}
+
+.registerButton {
+  width: 100%;
+  padding: 10px;
+  background-color: #A3775E;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.orText {
+  margin: 20px 0;
+  font-size: 16px;
+  color: #888;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.alreadyText {
+  font-size: 14px;
+  color: #888;
+}
+
+.loginButton {
+  background: none;
+  border: none;
+  color: #A3775E;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+}
