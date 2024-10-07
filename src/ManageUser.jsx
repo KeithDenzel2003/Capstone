@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
-import './ManageUser.css'; 
+import './ManageUser.css';
+
 export default function ManageUser() {
   const location = useLocation(); // Get the current URL path
   const [users, setUsers] = useState([
@@ -40,6 +41,8 @@ export default function ManageUser() {
               <span className="menu-text">Manage User</span>
             </Link>
           </div>
+
+          {/* Add the Send Alerts Link */}
           <div className={`menu-item ${location.pathname === '/send-alert' ? 'active' : ''}`}>
             <Link to="/send-alert" className="menu-link">
               <FontAwesomeIcon icon={faBell} className="menu-icon" />

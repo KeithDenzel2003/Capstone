@@ -1,23 +1,39 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom'; // React router for navigation
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser, faTimes } from '@fortawesome/free-solid-svg-icons'; // Added faTimes for X button
 import './Alert.css';
-import logo from '/images/logo.png';
 
 export default function Alert() {
-  const location = useLocation(); // Use this hook to get the current path
+  const location = useLocation(); // Get the current path for active menu item highlighting
+  const [showModal, setShowModal] = useState(false);
+  const [message, setMessage] = useState(""); // State to track the message input
+
+  // Function to toggle modal visibility
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  // Function to handle message input change
+  const handleMessageChange = (event) => {
+    setMessage(event.target.value);
+  };
+
+  // Function to handle sending notification
+  const handleSendNotif = () => {
+    console.log("Message to send:", message); // You can replace this with the actual send logic
+    setShowModal(false); // Close modal after sending
+  };
 
   return (
     <div className="dashboard-wrapper">
       {/* Sidebar */}
       <div className="sidebar">
-        {/* Brand Logo */}
-        <div className="brand">
-        <img src={logo} alt="logo" className="logo" />
+      <div className="brand">
+          <img src="./images/logo.png" alt="Church Konek Logo" className="logo" />
           <h2 className="brand-text">Church Konek</h2>
         </div>
-
+        
         {/* Menu Items */}
         <div className="menu-items">
           <div className={`menu-item ${location.pathname === '/dashboard' ? 'active' : ''}`}>
@@ -38,8 +54,6 @@ export default function Alert() {
               <span className="menu-text">Manage User</span>
             </Link>
           </div>
-
-          {/* Add the Send Alerts Link */}
           <div className={`menu-item ${location.pathname === '/send-alert' ? 'active' : ''}`}>
             <Link to="/send-alert" className="menu-link">
               <FontAwesomeIcon icon={faBell} className="menu-icon" />
@@ -66,43 +80,40 @@ export default function Alert() {
 
         {/* User Notification List */}
         <div className="alert-list">
-          <div className="alert-item">
-            <div className="user-info">
-              <img src="./images/user1.png" alt="User Profile" className="profile-image" /> {/* Profile Image */}
-              <div className="email-details">
-                <h3>Francis Flancia</h3>
-                <p>flanciafrancis@gmail.com</p>
+          {['Francis Flancia', 'John Doe', 'Jane Smith'].map((user, index) => (
+            <div className="alert-item" key={index}>
+              <div className="user-info">
+                <FontAwesomeIcon icon={faUser} className="profile-icon" />
+                <div className="email-details">
+                  <h3 className="user-name">{user}</h3>
+                  <p className="user-email">{`${user.toLowerCase().replace(' ', '')}@gmail.com`}</p>
+                </div>
               </div>
+              <div className="user-role">USER</div>
+              <button className="send-alert-btn" onClick={toggleModal}>SEND NOTIF</button>
             </div>
-            <div className="user-role">USER</div>
-            <button className="send-alert-btn">SEND NOTIF</button>
-          </div>
-
-          {/* Duplicate this block for more users */}
-          <div className="alert-item">
-            <div className="user-info">
-              <img src="./images/user2.png" alt="User Profile" className="profile-image" /> {/* Profile Image */}
-              <div className="email-details">
-                <h3>John Doe</h3>
-                <p>johndoe@gmail.com</p>
-              </div>
-            </div>
-            <div className="user-role">USER</div>
-            <button className="send-alert-btn">SEND NOTIF</button>
-          </div>
-
-          <div className="alert-item">
-            <div className="user-info">
-              <img src="./images/user3.png" alt="User Profile" className="profile-image" /> {/* Profile Image */}
-              <div className="email-details">
-                <h3>Jane Smith</h3>
-                <p>janesmith@gmail.com</p>
-              </div>
-            </div>
-            <div className="user-role">USER</div>
-            <button className="send-alert-btn">SEND NOTIF</button>
-          </div>
+          ))}
         </div>
+
+        {/* Modal Popup */}
+        {showModal && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              {/* X Close Button */}
+              <button className="close-btn" onClick={toggleModal}>
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
+              <h2>SEND NOTIF</h2>
+              <textarea
+                value={message}
+                onChange={handleMessageChange}
+                placeholder="Enter your message here..."
+                className="modal-textarea"
+              />
+              <button className="modal-send-btn" onClick={handleSendNotif}>SEND NOTIF</button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
