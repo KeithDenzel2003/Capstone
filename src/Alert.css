@@ -1,0 +1,102 @@
+/* Alert Page Styling */
+.alert-page {
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    width: 100vw; /* Ensure it takes the full width of the viewport */
+    box-sizing: border-box;
+  }
+  
+  /* Search Bar */
+  .search-bar {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start; /* Align search bar to the left */
+    padding-left: 10px;
+  }
+  
+  .search-input {
+    width: 250px; /* Reduced width for a shorter search bar */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Alert List */
+  .alert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Increased gap for clearer separation between users */
+  }
+  
+  /* Individual Alert Item */
+  .alert-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Enhanced box-shadow for better contrast */
+  }
+  
+  /* User Info */
+  .user-info {
+    display: flex;
+
+    align-items: center; /* Align icon and email vertically */
+    gap: 10px;
+  }
+
+  .email-icon {
+    font-size: 20px; /* Adjust size of the icon */
+    color: #555; /* Change color if needed */
+  }
+  
+  
+  .user-info h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .user-info p {
+    margin: 0;
+    color: #777;
+    font-size: 14px;
+  }
+  
+  /* User Role */
+  .user-role {
+    padding: 6px 15px;
+    background-color: #c5a27a;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  /* Send Notification Button */
+  .send-alert-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px; /* Added font size */
+    cursor: pointer;
+  }
+  
+  .send-alert-btn:hover {
+    background-color: #45a049;
+  }
+
+  .profile-image {
+    width: 40px; /* Set width as needed */
+    height: 40px; /* Set height as needed */
+    border-radius: 50%; /* Makes the image circular */
+    margin-right: 10px; /* Space between the image and text */
+  }
+  
+  

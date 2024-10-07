@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
-import './Dashboard.css';
-
-export default function Dashboard() {
+import './ManageUser.css'; 
+export default function ManageUser() {
   const location = useLocation(); // Get the current URL path
+  const [users, setUsers] = useState([
+    { id: 1, name: 'Francis Flancia', email: 'flanciafrancis@gmail.com', role: 'User' },
+    // Add more user objects here
+  ]);
 
   return (
     <div className="dashboard-wrapper">
@@ -37,8 +40,6 @@ export default function Dashboard() {
               <span className="menu-text">Manage User</span>
             </Link>
           </div>
-
-          {/* Add the Send Alerts Link here */}
           <div className={`menu-item ${location.pathname === '/send-alert' ? 'active' : ''}`}>
             <Link to="/send-alert" className="menu-link">
               <FontAwesomeIcon icon={faBell} className="menu-icon" />
@@ -58,25 +59,33 @@ export default function Dashboard() {
 
       {/* Main Content */}
       <div className="main-content">
-        <h1 className="welcome-text">WELCOME, Francis Flancia</h1>
+        <div className="manage-user-container">
+          <h1>Manage Users</h1>
 
-        {/* Appointment Cards */}
-        <div className="appointment-section">
-          <div className="appointment-header">
-            <FontAwesomeIcon icon={faCalendarAlt} className="appointment-icon" />
-            <span className="appointment-title">2 New Appointments</span>
+          {/* Search Bar */}
+          <div className="search-bar">
+            <input type="text" placeholder="Search User..." />
+            <button className="add-user-button">Add User</button>
           </div>
 
-          {/* Appointment List */}
-          <div className="appointment-list">
-            <div className="appointment-card">
-              <FontAwesomeIcon icon={faUser} className="card-icon" />
-              <span className="card-text">Francis Flancia - House Blessing</span>
-            </div>
-            <div className="appointment-card">
-              <FontAwesomeIcon icon={faUser} className="card-icon" />
-              <span className="card-text">Francis Flancia - Wedding</span>
-            </div>
+          {/* User List */}
+          <div className="user-list">
+            {users.map(user => (
+              <div className="user-card" key={user.id}>
+                <div className="user-info">
+                  <FontAwesomeIcon icon={faUser} className="user-icon" />
+                  <div className="user-details">
+                    <span>{user.name}</span>
+                    <span>{user.email}</span>
+                  </div>
+                </div>
+                <div className="user-actions">
+                  <span className="user-role">{user.role}</span>
+                  <button className="edit-button">Edit</button>
+                  <button className="remove-button">Remove</button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -2,10 +2,11 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
-import './Dashboard.css';
+import './Alert.css';
+import logo from '/images/logo.png';
 
-export default function Dashboard() {
-  const location = useLocation(); // Get the current URL path
+export default function Alert() {
+  const location = useLocation(); // Use this hook to get the current path
 
   return (
     <div className="dashboard-wrapper">
@@ -13,7 +14,7 @@ export default function Dashboard() {
       <div className="sidebar">
         {/* Brand Logo */}
         <div className="brand">
-          <img src="./images/logo.png" alt="Church Konek Logo" className="logo" />
+        <img src={logo} alt="logo" className="logo" />
           <h2 className="brand-text">Church Konek</h2>
         </div>
 
@@ -38,7 +39,7 @@ export default function Dashboard() {
             </Link>
           </div>
 
-          {/* Add the Send Alerts Link here */}
+          {/* Add the Send Alerts Link */}
           <div className={`menu-item ${location.pathname === '/send-alert' ? 'active' : ''}`}>
             <Link to="/send-alert" className="menu-link">
               <FontAwesomeIcon icon={faBell} className="menu-icon" />
@@ -56,27 +57,50 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="main-content">
-        <h1 className="welcome-text">WELCOME, Francis Flancia</h1>
+      {/* Main Content - Alert Section */}
+      <div className="alert-page">
+        {/* Search Bar */}
+        <div className="search-bar">
+          <input type="text" placeholder="Search User" className="search-input" />
+        </div>
 
-        {/* Appointment Cards */}
-        <div className="appointment-section">
-          <div className="appointment-header">
-            <FontAwesomeIcon icon={faCalendarAlt} className="appointment-icon" />
-            <span className="appointment-title">2 New Appointments</span>
+        {/* User Notification List */}
+        <div className="alert-list">
+          <div className="alert-item">
+            <div className="user-info">
+              <img src="./images/user1.png" alt="User Profile" className="profile-image" /> {/* Profile Image */}
+              <div className="email-details">
+                <h3>Francis Flancia</h3>
+                <p>flanciafrancis@gmail.com</p>
+              </div>
+            </div>
+            <div className="user-role">USER</div>
+            <button className="send-alert-btn">SEND NOTIF</button>
           </div>
 
-          {/* Appointment List */}
-          <div className="appointment-list">
-            <div className="appointment-card">
-              <FontAwesomeIcon icon={faUser} className="card-icon" />
-              <span className="card-text">Francis Flancia - House Blessing</span>
+          {/* Duplicate this block for more users */}
+          <div className="alert-item">
+            <div className="user-info">
+              <img src="./images/user2.png" alt="User Profile" className="profile-image" /> {/* Profile Image */}
+              <div className="email-details">
+                <h3>John Doe</h3>
+                <p>johndoe@gmail.com</p>
+              </div>
             </div>
-            <div className="appointment-card">
-              <FontAwesomeIcon icon={faUser} className="card-icon" />
-              <span className="card-text">Francis Flancia - Wedding</span>
+            <div className="user-role">USER</div>
+            <button className="send-alert-btn">SEND NOTIF</button>
+          </div>
+
+          <div className="alert-item">
+            <div className="user-info">
+              <img src="./images/user3.png" alt="User Profile" className="profile-image" /> {/* Profile Image */}
+              <div className="email-details">
+                <h3>Jane Smith</h3>
+                <p>janesmith@gmail.com</p>
+              </div>
             </div>
+            <div className="user-role">USER</div>
+            <button className="send-alert-btn">SEND NOTIF</button>
           </div>
         </div>
       </div>

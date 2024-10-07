@@ -1,0 +1,163 @@
+.profile-wrapper {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .brand-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d88b50;
+    line-height: 1;
+  }
+  
+  .menu-items {
+    flex: 1;
+  }
+  
+  .menu-item {
+    margin-bottom: 25px;
+  }
+  
+  .menu-link {
+    display: flex;
+    align-items: center;
+    color: #555;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  
+  .menu-icon {
+    margin-right: 15px;
+    font-size: 25px;
+    color: #555;
+  }
+  
+  .menu-text {
+    font-size: 20px;
+    color: #555;
+  }
+  
+  .menu-link.active {
+    font-weight: bold;
+    color: #d88b50;
+  }
+  
+  .profile-item {
+    margin-top: auto;
+  }
+  
+  .profile-content {
+    padding: 40px;
+    flex: 1;
+    background-color: #fff;
+  }
+  
+  .profile-header {
+    display: flex; /* Align profile picture and details horizontally */
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  
+  .profile-icon {
+    font-size: 70px;
+    color: #555;
+    margin-right: 20px; /* Space between icon and details */
+  }
+  
+  .profile-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 5px; /* Adjust margin to control spacing between name and email */
+  }
+  
+  .profile-email {
+    font-size: 18px;
+    color: #777;
+    text-decoration: none;
+    margin-top: 0; /* Reduce top margin for better alignment */
+  }
+  
+  .profile-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns for the form layout */
+    gap: 20px; /* Space between fields */
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    color: black;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f4f4f4;
+    color: black;
+  }
+  
+  input[disabled] {
+    background-color: #e0e0e0;
+  }
+  
+  .form-group.password {
+
+  }
+  
+  .form-group.confirm-password {
+    grid-column: 2 / 3; /* Confirm password on the right */
+  }
+  
+  .save-btn {
+    grid-column: span 2; /* Save button spans across two columns */
+    background-color: #d88b50;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .save-btn:hover {
+    background-color: #c07a45;
+  }
+  

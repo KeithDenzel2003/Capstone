@@ -2,22 +2,20 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
-import './Dashboard.css';
+import './ProfileScreen.css';
 
-export default function Dashboard() {
-  const location = useLocation(); // Get the current URL path
+export default function ProfileScreen() {
+  const location = useLocation(); // Get the current location
 
   return (
-    <div className="dashboard-wrapper">
+    <div className="profile-wrapper">
       {/* Sidebar */}
       <div className="sidebar">
-        {/* Brand Logo */}
         <div className="brand">
           <img src="./images/logo.png" alt="Church Konek Logo" className="logo" />
           <h2 className="brand-text">Church Konek</h2>
         </div>
 
-        {/* Menu Items */}
         <div className="menu-items">
           <div className={`menu-item ${location.pathname === '/dashboard' ? 'active' : ''}`}>
             <Link to="/dashboard" className="menu-link">
@@ -37,8 +35,6 @@ export default function Dashboard() {
               <span className="menu-text">Manage User</span>
             </Link>
           </div>
-
-          {/* Add the Send Alerts Link here */}
           <div className={`menu-item ${location.pathname === '/send-alert' ? 'active' : ''}`}>
             <Link to="/send-alert" className="menu-link">
               <FontAwesomeIcon icon={faBell} className="menu-icon" />
@@ -47,7 +43,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Profile at the bottom */}
         <div className={`menu-item profile-item ${location.pathname === '/profile' ? 'active' : ''}`}>
           <Link to="/profile" className="menu-link">
             <FontAwesomeIcon icon={faUser} className="menu-icon" />
@@ -56,28 +51,43 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="main-content">
-        <h1 className="welcome-text">WELCOME, Francis Flancia</h1>
+      {/* Main Profile Content */}
+      <div className="profile-content">
+        <div className="profile-header">
+          <FontAwesomeIcon icon={faUser} className="profile-icon" />
+          <div className="profile-details">
+            <h2 className="profile-name">Francis Flancia</h2>
+            <p className="profile-email">flanciafrancis@gmail.com</p>
+          </div>
+        </div>
 
-        {/* Appointment Cards */}
-        <div className="appointment-section">
-          <div className="appointment-header">
-            <FontAwesomeIcon icon={faCalendarAlt} className="appointment-icon" />
-            <span className="appointment-title">2 New Appointments</span>
+        <div className="profile-form">
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input type="text" id="name" placeholder="Francis Flancia" />
           </div>
 
-          {/* Appointment List */}
-          <div className="appointment-list">
-            <div className="appointment-card">
-              <FontAwesomeIcon icon={faUser} className="card-icon" />
-              <span className="card-text">Francis Flancia - House Blessing</span>
-            </div>
-            <div className="appointment-card">
-              <FontAwesomeIcon icon={faUser} className="card-icon" />
-              <span className="card-text">Francis Flancia - Wedding</span>
-            </div>
+          <div className="form-group">
+            <label htmlFor="phone">Phone Number</label>
+            <input type="text" id="phone" placeholder="0912345678" />
           </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" placeholder="flanciafrancis@gmail.com" />
+          </div>
+
+          <div className="form-group password">
+            <label htmlFor="password">Password</label>
+            <input type="password" id="password" placeholder="Enter New Password" />
+          </div>
+
+          <div className="form-group confirm-password">
+            <label htmlFor="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" placeholder="Confirm New Password" />
+          </div>
+
+          <button className="save-btn">SAVE CHANGES</button>
         </div>
       </div>
     </div>
