@@ -80,7 +80,7 @@ export default function Alert() {
 
         {/* User Notification List */}
         <div className="alert-list">
-          {['Francis Flancia', 'John Doe', 'Jane Smith'].map((user, index) => (
+          {['Francis Flancia', 'Boyka', 'Lebron Jordan'].map((user, index) => (
             <div className="alert-item" key={index}>
               <div className="user-info">
                 <FontAwesomeIcon icon={faUser} className="profile-icon" />

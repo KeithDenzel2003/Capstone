@@ -1,0 +1,129 @@
+/* Main container for the View Appointment page */
+.dashboard-wrapper {
+    display: flex;
+    height: 100vh;
+    background-color: #ffffff;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    background-color: #f4ede4;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .brand-text {
+    font-size: 22px;
+    color: #70483c;
+    text-align: center;
+  }
+  
+  /* Main Content Area */
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  
+  h1 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Calendar container */
+  .calendar-container {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center; /* Center the calendar */
+  }
+  
+  /* Adjusting the size of the calendar */
+  .react-calendar {
+    width: 80%;  /* Increase the width */
+    max-width: 800px; /* Set a max-width */
+    height: auto;
+    font-size: 1.5rem; /* Increase font size */
+  }
+  
+  /* Ensure all text is black, including month names */
+  .react-calendar__navigation button {
+    color: black !important; /* Ensure month and year navigation buttons are black */
+  }
+  
+  .react-calendar__tile--now {
+    background: #ffff9f; /* Highlight current day or month in yellow */
+    color: black !important; /* Ensure the text color is black */
+    border-radius: 10px;
+  }
+  
+  .react-calendar__tile--active {
+    background: #007bff; /* Active tile background is blue */
+    color: white !important; /* Ensure white text on active days */
+    border-radius: 10px;
+  }
+  
+  .react-calendar__tile--hover {
+    color: black !important; /* Ensure hovered tile has black text */
+  }
+  
+  .react-calendar__tile {
+    color: black !important; /* Ensure all tile text is black */
+    padding: 15px; /* Add padding around the numbers */
+    font-size: 20px; /* Adjust font size */
+  }
+  
+  /* Month view styles */
+  .react-calendar__year-view__months__month {
+    color: black !important; /* Make sure the month text is black */
+    font-size: 1.5rem; /* Adjust month font size */
+  }
+  
+  /* Additional styles for the calendar */
+  .date-display {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .menu-items .menu-item {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .menu-items .menu-item.active {
+    background-color: #d1c5b0;
+  }
+  
+  .menu-link {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .menu-icon {
+    margin-right: 10px;
+    color: #70483c;
+  }
+  
+  .menu-text {
+    font-size: 16px;
+  }
+  
+  /* Profile item styling */
+  .profile-item {
+    margin-top: 20px;
+  }

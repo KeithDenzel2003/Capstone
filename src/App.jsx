@@ -8,6 +8,7 @@ import Dashboard from './Dashboard';
 import ProfileScreen from './ProfileScreen';
 import Alert from './Alert';
 import ManageUser from './ManageUser';
+import ViewAppointment from './ViewAppointment';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/send-alert" element={<Alert />} />
         <Route path="/manage-user" element={<ManageUser/>} />
+        <Route path="/view-appointment" element={<ViewAppointment />} />
       </Routes>
     </Router>
   );
