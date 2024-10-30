@@ -17,10 +17,11 @@ export default function ManageUser() {
       <div className="sidebar">
         {/* Brand Logo */}
         <div className="brand">
+          <img src="./images/logo.png" alt="Church Konek Logo" className="logo" />
+          <h2 className="brand-text" style={{ fontSize: '20px' }}>Church Konek</h2>
 
-          <h2 className="brand-text">Church Konek</h2>
         </div>
-
+        
         {/* Menu Items */}
         <div className="menu-items">
           <div className={`menu-item ${location.pathname === '/dashboard' ? 'active' : ''}`}>
