@@ -1,69 +1,98 @@
+/* Container styles */
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  justify-content: center;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent scrolling */
   background-color: #f8f8f8;
+  padding: 20px; /* Add padding for small screens */
+  box-sizing: border-box; /* Include padding in width/height calculations */
 }
 
-.signupContainer {
-  width: 350px;
-  padding: 40px;
-  background-color: #f8f8f8;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
+/* Title container */
+.signupTitleContainer {
+  width: 100%;
+  text-align: center; /* Center the title */
   margin-bottom: 20px;
+}
+
+/* Title styling */
+.title {
+  font-size: 20px;
+  font-weight: bold;
   color: #A3775E;
 }
 
+/* Main signup form container */
+.signupContainer {
+  width: 100%;
+  max-width: 360px; /* Limit max width for larger screens */
+  padding: 25px 20px;
+  background-color: #f4f4f4;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box; /* Include padding in width/height calculations */
+}
+
+/* Input container styling */
 .inputContainer {
+  width: 100%;
   margin-bottom: 15px;
-  
+  text-align: left;
 }
 
 .label {
   display: block;
   font-size: 12px;
-  color: black;
+  font-weight: bold;
+  color: #555;
   margin-bottom: 5px;
 }
 
+/* Input styling with bottom border only */
 .input {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #888;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: white;
-  color: black;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 1px solid #888;
+  font-size: 14px;
+  background-color: transparent;
+  color: #333;
+  outline: none;
 }
 
+/* Register button styling */
 .registerButton {
   width: 100%;
   padding: 10px;
   background-color: #A3775E;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-top: 20px;
   font-size: 16px;
   font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
 }
 
+.registerButton:hover {
+  background-color: #8b5e41;
+}
+
+/* "Or" text styling */
 .orText {
-  margin: 20px 0;
-  font-size: 16px;
+  margin: 15px 0;
+  font-size: 14px;
   color: #888;
+  text-align: center;
 }
 
+/* Social icons container */
 .socialIcons {
   display: flex;
   justify-content: center;
@@ -75,11 +104,19 @@
   cursor: pointer;
 }
 
+/* Already have an account container */
+.alreadyContainer {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Already have an account text */
 .alreadyText {
   font-size: 14px;
   color: #888;
 }
 
+/* Login button styling */
 .loginButton {
   background: none;
   border: none;

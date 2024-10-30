@@ -30,7 +30,6 @@ export default function Alert() {
       {/* Sidebar */}
       <div className="sidebar">
       <div className="brand">
-          <img src="./images/logo.png" alt="Church Konek Logo" className="logo" />
           <h2 className="brand-text">Church Konek</h2>
         </div>
         

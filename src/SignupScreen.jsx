@@ -1,25 +1,43 @@
 import React, { useState } from 'react';
-import './SignupStyles.css'; // Import your CSS file
+import './SignupStyles.css';
 import { useNavigate } from 'react-router-dom';
 import { FaFacebook, FaApple, FaGoogle } from 'react-icons/fa';
+import { supabase } from './supabaseClient';
 
 const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
+
+  const handleSignUp = async () => {
+    if (password !== confirmPassword) {
+      setMessage("Passwords don't match");
+      return;
+    }
+
+    const { error } = await supabase.auth.signUp({ email, password });
+
+    if (error) {
+      setMessage(error.message);
+    } else {
+      setMessage("Sign-up successful! Please check your email to confirm.");
+    }
+  };
 
   return (
     <div className="container">
-      <div className="signupContainer">
+      <div className="signupTitleContainer">
         <h2 className="title">SIGN UP</h2>
-        
+      </div>
+
+      <div className="signupContainer">
         <div className="inputContainer">
           <label className="label">NAME</label>
           <input
-            className="input"
+            className="input lineInput"
             type="text"
             placeholder="Enter your name"
             value={name}
@@ -30,7 +48,7 @@ const Signup = () => {
         <div className="inputContainer">
           <label className="label">EMAIL</label>
           <input
-            className="input"
+            className="input lineInput"
             type="email"
             placeholder="Enter your email"
             value={email}
@@ -41,7 +59,7 @@ const Signup = () => {
         <div className="inputContainer">
           <label className="label">PASSWORD</label>
           <input
-            className="input"
+            className="input lineInput"
             type="password"
             placeholder="Enter your password"
             value={password}
@@ -52,7 +70,7 @@ const Signup = () => {
         <div className="inputContainer">
           <label className="label">CONFIRM PASSWORD</label>
           <input
-            className="input"
+            className="input lineInput"
             type="password"
             placeholder="Confirm your password"
             value={confirmPassword}
@@ -60,7 +78,8 @@ const Signup = () => {
           />
         </div>
 
-        <button className="registerButton">Register</button>
+        <button className="registerButton" onClick={handleSignUp}>Register</button>
+        {message && <p className="message">{message}</p>}
       </div>
 
       <p className="orText">Or</p>
@@ -69,8 +88,11 @@ const Signup = () => {
         <FaApple size={30} color="#000" className="icon" />
         <FaGoogle size={30} color="#DB4437" className="icon" />
       </div>
-      <p className="alreadyText">Already have an Account?</p>
-      <button className="loginButton" onClick={() => navigate('/login')}>LOGIN</button>
+
+      <div className="alreadyContainer">
+        <p className="alreadyText">Already have an account?</p>
+        <button className="loginButton" onClick={() => navigate('/login')}>LOGIN</button>
+      </div>
     </div>
   );
 };
