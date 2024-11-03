@@ -27,4 +27,16 @@ function App() {
   );
 }
 
+/*const express = require('express');  // PARA SA SEND NOTIF PERO HINDI PA MA TESTING
+const notificationController = require('./routes/notificationController'); // Adjust path as needed
+
+const app = express();
+app.use(express.json());
+
+// Use the notification route
+app.use('/api', notificationController);
+
+const PORT = process.env.PORT || 5000;*/
+
+
 export default App;

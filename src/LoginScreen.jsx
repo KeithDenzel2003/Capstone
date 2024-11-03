@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import './LoginScreen.css';
 import logo from '/images/logo.png';
 
@@ -7,12 +7,12 @@ export default function LoginScreen() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     console.log('Login button pressed');
     console.log('Name:', name, 'Password:', password, 'Remember Me:', rememberMe);
-    navigate('/dashboard'); // Redirect to Dashboard
+    navigate('/dashboard');
   };
 
   return (
@@ -57,9 +57,15 @@ export default function LoginScreen() {
       <p className="or">Or</p>
 
       <div className="social-login-row">
-        <img src="./images/Facebook.png" alt="Facebook" />
-        <img src="./images/apple.png" alt="Apple" />
-        <img src="./images/Google.png" alt="Google" />
+        <a href="https://www.facebook.com/login" target="_blank" rel="noopener noreferrer">
+          <img src="./images/Facebook.png" alt="Facebook" />
+        </a>
+        <a href="https://appleid.apple.com/" target="_blank" rel="noopener noreferrer">
+          <img src="./images/apple.png" alt="Apple" />
+        </a>
+        <a href="https://accounts.google.com/signin" target="_blank" rel="noopener noreferrer">
+          <img src="./images/Google.png" alt="Google" />
+        </a>
       </div>
 
       <div className="signup-container">

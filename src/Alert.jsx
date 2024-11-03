@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'; // React router for naviga
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser, faTimes } from '@fortawesome/free-solid-svg-icons'; // Added faTimes for X button
 import './Alert.css';
+import axios from 'axios';
 
 export default function Alert() {
   const location = useLocation(); // Get the current path for active menu item highlighting
@@ -19,10 +20,25 @@ export default function Alert() {
     setMessage(event.target.value);
   };
 
-  // Function to handle sending notification
-  const handleSendNotif = () => {
-    console.log("Message to send:", message); // You can replace this with the actual send logic
-    setShowModal(false); // Close modal after sending
+  // Function to handle sending notification     BINAGO KO TO PERO HINDI PA NA TETESTING
+  const handleSendNotif = async () => {
+    try {
+      // Replace "user-id-example" with the actual ID you need
+      const userId = "user-id-example";
+      const response = await axios.post('http://localhost:5000/api/sendNotification', {
+        userId,
+        message,
+      });
+  
+      if (response.data.success) {
+        alert("Notification sent successfully!");
+        setShowModal(false); // Close modal after sending
+        setMessage(""); // Clear message
+      }
+    } catch (error) {
+      console.error("Failed to send notification:", error);
+      alert("Failed to send notification");
+    } // HANGGANG  DITO
   };
 
   return (

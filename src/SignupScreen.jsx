@@ -10,6 +10,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [retryCount, setRetryCount] = useState(0); // Keep track of retry attempts
   const navigate = useNavigate();
 
   const handleSignUp = async () => {
@@ -21,9 +22,20 @@ const Signup = () => {
     const { error } = await supabase.auth.signUp({ email, password });
 
     if (error) {
-      setMessage(error.message);
+      if (error.message.includes("rate limit exceeded")) {
+        setMessage("Too many requests. Please wait a few minutes before trying again.");
+        if (retryCount < 3) {
+          setRetryCount(retryCount + 1);
+          setTimeout(() => handleSignUp(), 3000); // Retry after 3 seconds
+        }
+      } else {
+        setMessage(error.message);
+      }
     } else {
       setMessage("Sign-up successful! Please check your email to confirm.");
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000); // Optional delay to show the message before redirect
     }
   };
 
@@ -84,9 +96,15 @@ const Signup = () => {
 
       <p className="orText">Or</p>
       <div className="socialIcons">
-        <FaFacebook size={30} color="#4267B2" className="icon" />
-        <FaApple size={30} color="#000" className="icon" />
-        <FaGoogle size={30} color="#DB4437" className="icon" />
+        <a href="https://www.facebook.com/login" target="_blank" rel="noopener noreferrer">
+          <FaFacebook size={30} color="#4267B2" className="icon" />
+        </a>
+        <a href="https://appleid.apple.com/" target="_blank" rel="noopener noreferrer">
+          <FaApple size={30} color="#000" className="icon" />
+        </a>
+        <a href="https://accounts.google.com/signin" target="_blank" rel="noopener noreferrer">
+          <FaGoogle size={30} color="#DB4437" className="icon" />
+        </a>
       </div>
 
       <div className="alreadyContainer">

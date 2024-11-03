@@ -5,60 +5,51 @@ import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser } from '@fortawesom
 import './ManageUser.css';
 
 export default function ManageUser() {
-  const location = useLocation(); // Get the current URL path
+  const location = useLocation();
+  
+  // States for managing users and input fields
   const [users, setUsers] = useState([
     { id: 1, name: 'Francis Flancia', email: 'flanciafrancis@gmail.com', role: 'User' },
-    // Add more user objects here
+    // Additional users here
   ]);
+  const [editUserId, setEditUserId] = useState(null);
+  const [newRole, setNewRole] = useState('');
+  const [newUser, setNewUser] = useState({ name: '', email: '', role: 'User' });
+
+  // Function to handle editing a user's role
+  const handleEdit = (userId, currentRole) => {
+    console.log("Edit button clicked for user:", userId);
+    setEditUserId(userId);
+    setNewRole(currentRole);
+  };
+
+  // Function to save the updated role
+  const handleSaveRole = (userId) => {
+    console.log("Save button clicked for user:", userId);
+    setUsers(users.map(user => user.id === userId ? { ...user, role: newRole } : user));
+    setEditUserId(null);
+  };
+
+  // Function to remove a user
+  const handleRemove = (userId) => {
+    console.log("Remove button clicked for user:", userId);
+    setUsers(users.filter(user => user.id !== userId));
+  };
+
+  // Function to add a new user
+  const handleAddUser = () => {
+    console.log("Add User button clicked:", newUser);
+    if (newUser.name && newUser.email) {
+      setUsers([...users, { ...newUser, id: users.length + 1 }]);
+      setNewUser({ name: '', email: '', role: 'User' });
+    } else {
+      console.log("Name and Email are required");
+    }
+  };
 
   return (
     <div className="dashboard-wrapper">
-      {/* Sidebar */}
-      <div className="sidebar">
-        {/* Brand Logo */}
-        <div className="brand">
-
-          <h2 className="brand-text">Church Konek</h2>
-        </div>
-
-        {/* Menu Items */}
-        <div className="menu-items">
-          <div className={`menu-item ${location.pathname === '/dashboard' ? 'active' : ''}`}>
-            <Link to="/dashboard" className="menu-link">
-              <FontAwesomeIcon icon={faThLarge} className="menu-icon" />
-              <span className="menu-text">Dashboard</span>
-            </Link>
-          </div>
-          <div className={`menu-item ${location.pathname === '/view-appointment' ? 'active' : ''}`}>
-            <Link to="/view-appointment" className="menu-link">
-              <FontAwesomeIcon icon={faCalendarAlt} className="menu-icon" />
-              <span className="menu-text">View Appointments</span>
-            </Link>
-          </div>
-          <div className={`menu-item ${location.pathname === '/manage-user' ? 'active' : ''}`}>
-            <Link to="/manage-user" className="menu-link">
-              <FontAwesomeIcon icon={faUserCog} className="menu-icon" />
-              <span className="menu-text">Manage User</span>
-            </Link>
-          </div>
-
-          {/* Add the Send Alerts Link */}
-          <div className={`menu-item ${location.pathname === '/send-alert' ? 'active' : ''}`}>
-            <Link to="/send-alert" className="menu-link">
-              <FontAwesomeIcon icon={faBell} className="menu-icon" />
-              <span className="menu-text">Send Alerts</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Profile at the bottom */}
-        <div className={`menu-item profile-item ${location.pathname === '/profile' ? 'active' : ''}`}>
-          <Link to="/profile" className="menu-link">
-            <FontAwesomeIcon icon={faUser} className="menu-icon" />
-            <span className="menu-text">Profile</span>
-          </Link>
-        </div>
-      </div>
+      {/* Sidebar and other content */}
 
       {/* Main Content */}
       <div className="main-content">
@@ -67,8 +58,13 @@ export default function ManageUser() {
 
           {/* Search Bar */}
           <div className="search-bar">
-            <input type="text" placeholder="Search User..." />
-            <button className="add-user-button">Add User</button>
+            <input
+              type="text"
+              placeholder="Search User..."
+              value={newUser.name}
+              onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+            />
+            <button className="add-user-button" onClick={handleAddUser}>Add User</button>
           </div>
 
           {/* User List */}
@@ -83,9 +79,22 @@ export default function ManageUser() {
                   </div>
                 </div>
                 <div className="user-actions">
-                  <span className="user-role">{user.role}</span>
-                  <button className="edit-button">Edit</button>
-                  <button className="remove-button">Remove</button>
+                  {editUserId === user.id ? (
+                    <>
+                      <input
+                        type="text"
+                        value={newRole}
+                        onChange={(e) => setNewRole(e.target.value)}
+                      />
+                      <button className="save-button" onClick={() => handleSaveRole(user.id)}>Save</button>
+                    </>
+                  ) : (
+                    <>
+                      <span className="user-role">{user.role}</span>
+                      <button className="edit-button" onClick={() => handleEdit(user.id, user.role)}>Edit</button>
+                    </>
+                  )}
+                  <button className="remove-button" onClick={() => handleRemove(user.id)}>Remove</button>
                 </div>
               </div>
             ))}
