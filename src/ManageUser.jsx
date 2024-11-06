@@ -1,48 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
+import { supabase } from './supabaseClient';
 import './ManageUser.css';
 
 export default function ManageUser() {
   const location = useLocation();
-  const [users, setUsers] = useState([
-    { id: 1, name: 'Francis Flancia', email: 'flanciafrancis@gmail.com', role: 'User' },
-    // Add more user objects here if needed
-  ]);
-  const [newUser, setNewUser] = useState({ name: '', email: '', role: 'User' });
+  const [users, setUsers] = useState([]);
   const [editUserId, setEditUserId] = useState(null);
   const [editDetails, setEditDetails] = useState({ name: '', email: '', role: 'User' });
-  const [searchTerm, setSearchTerm] = useState(''); // State for search term
+  const [searchTerm, setSearchTerm] = useState('');
 
-  // Handler for adding a new user
-  const handleAddUser = () => {
-    if (newUser.name && newUser.email) {  // Check for non-empty fields
-      const id = users.length ? users[users.length - 1].id + 1 : 1;
-      setUsers([...users, { id, ...newUser }]);
-      setNewUser({ name: '', email: '', role: 'User' });
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  // Fetch users from Supabase
+  const fetchUsers = async () => {
+    const { data, error } = await supabase.from('users').select('user_id, full_name, email');
+    if (error) {
+      console.error('Error fetching users:', error);
+    } else {
+      setUsers(data.map(user => ({
+        id: user.user_id,
+        name: user.full_name,
+        email: user.email,
+        role: 'User' // Assuming default role; adjust if you have roles in the database
+      })));
     }
   };
 
-  // Handler for initiating the edit mode
   const handleEditUser = (user) => {
     setEditUserId(user.id);
     setEditDetails({ name: user.name, email: user.email, role: user.role });
   };
 
-  // Handler for saving the edited user details
   const handleSaveEdit = () => {
     setUsers(users.map(user => user.id === editUserId ? { ...user, ...editDetails } : user));
     setEditUserId(null);
     setEditDetails({ name: '', email: '', role: 'User' });
   };
 
-  // Handler for removing a user
-  const handleRemoveUser = (id) => {
-    setUsers(users.filter(user => user.id !== id));
+  const handleRemoveUser = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+    if (!confirmDelete) return;
+
+    const { error } = await supabase.from('users').delete().eq('user_id', id);
+    if (error) {
+      console.error('Error deleting user:', error);
+      alert("Failed to delete user.");
+    } else {
+      setUsers(users.filter(user => user.id !== id)); // Update state to remove user locally
+      alert("User successfully deleted.");
+    }
   };
 
-  // Filter users based on the search term
   const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.email.toLowerCase().includes(searchTerm.toLowerCase())
@@ -55,15 +68,9 @@ export default function ManageUser() {
         <div className="brand">
           <img src="./images/logo.png" alt="Church Konek Logo" className="logo" />
           <h2 className="brand-text" style={{ fontSize: '20px' }}>Church Konek</h2>
-<<<<<<< HEAD
         </div>
-        
-=======
 
-        </div>
-        
         {/* Menu Items */}
->>>>>>> fbad524f01dcbbdd82f32d3a4a91e82d0722ab28
         <div className="menu-items">
           <div className={`menu-item ${location.pathname === '/dashboard' ? 'active' : ''}`}>
             <Link to="/dashboard" className="menu-link">
@@ -104,31 +111,14 @@ export default function ManageUser() {
         <div className="manage-user-container">
           <h1>Manage Users</h1>
 
-          {/* Search Bar Above Add User */}
+          {/* Search Bar */}
           <div className="search-bar">
             <input
               type="text"
               placeholder="Search by name or email"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} // Update search term
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
-          </div>
-
-          {/* Add User Section */}
-          <div className="add-user-section">
-            <input
-              type="text"
-              placeholder="User name"
-              value={newUser.name}
-              onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-            />
-            <input
-              type="text"
-              placeholder="User email"
-              value={newUser.email}
-              onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-            />
-            <button className="add-user-button" onClick={handleAddUser}>Add User</button>
           </div>
 
           {/* User List */}
