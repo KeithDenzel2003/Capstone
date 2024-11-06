@@ -10,9 +10,16 @@ export default function LoginScreen() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
+    // Validation check: ensure name and password fields are not empty
+    if (!name || !password) {
+      alert('Please enter both name and password.');
+      return; // Stop the function from proceeding if fields are empty
+    }
+
+    // If validation passes, proceed with login
     console.log('Login button pressed');
     console.log('Name:', name, 'Password:', password, 'Remember Me:', rememberMe);
-    navigate('/dashboard');
+    navigate('/dashboard'); // Navigate to the dashboard page
   };
 
   return (

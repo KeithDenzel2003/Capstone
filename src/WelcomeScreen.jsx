@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './WelcomeScreen.css';
 
-
 export default function WelcomeScreen() {
   const navigate = useNavigate(); // React Router's hook for navigation
 

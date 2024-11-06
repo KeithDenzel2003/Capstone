@@ -19,8 +19,11 @@ export default function ViewAppointment() {
     <div className="dashboard-wrapper">
       {/* Sidebar */}
       <div className="sidebar">
+        {/* Brand Logo */}
         <div className="brand">
-          <h2 className="brand-text">Church Konek</h2>
+          <img src="./images/logo.png" alt="Church Konek Logo" className="logo" />
+          <h2 className="brand-text" style={{ fontSize: '20px' }}>Church Konek</h2>
+
         </div>
 
         {/* Menu Items */}

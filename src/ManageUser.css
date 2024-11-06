@@ -90,28 +90,64 @@ h1 {
 /* Search Bar */
 .search-bar {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 }
 
 .search-bar input {
-  width: 70%;
-  padding: 10px;
+  flex: 1;
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 16px;
+  margin-right: 10px;
+  transition: border-color 0.3s;
+}
+
+.search-bar input:focus {
+  border-color: #c19674;
+  outline: none;
+}
+
+/* Add User Section */
+.add-user-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-user-section input {
+  padding: 10px;
+  width: 200px;
+  max-width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.add-user-section input:focus {
+  border-color: #c19674;
+  box-shadow: 0 0 5px rgba(193, 150, 116, 0.3);
 }
 
 .add-user-button {
   background-color: #c19674;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .add-user-button:hover {
   background-color: #a87e5c;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* User list container */

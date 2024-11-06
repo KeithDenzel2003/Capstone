@@ -1,3 +1,9 @@
+/* Full-screen styles for the login page */
+html, body {
+  height: 100%; /* Ensure the body takes full height */
+  margin: 0; /* Remove default margin */
+}
+
 /* Container styles */
 .login-container {
   display: flex;
@@ -5,7 +11,8 @@
   align-items: center;
   justify-content: center;
   background-color: #ffffff;
-  height: 100vh;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
   position: relative;
 }
 
@@ -20,7 +27,7 @@
 
 /* Form container */
 .login-form {
-  width: 360px; /* Adjusted width for better alignment */
+  width: 360px; /* Fixed width for the form */
   padding: 30px;
   background-color: #f8f8f8;
   border-radius: 12px;

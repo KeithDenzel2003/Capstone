@@ -8,32 +8,34 @@ html, body {
   justify-content: center;
   align-items: center;
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0; /* Optional background for entire viewport */
+  background-color: #f0f0f0;
 }
 
 .container {
   text-align: center;
   padding: 50px;
-  background-color: #ffffff; /* Set background color to white */
+  background-color: #ffffff;
   width: 100vw;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center items horizontally */
-  justify-content: center; /* Center items vertically */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
 }
 
 .logo {
-  width: 80px; /* Make the logo smaller */
-  margin-bottom: 20px; /* Increased margin for more spacing */
+  width: 80px;
+  margin-bottom: 20px;
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 5rem; /* Reduced font size slightly */
   color: #C39269;
-  margin: 20px 0; /* Added margin for spacing */
+  margin: 20px 0;
+  white-space: nowrap; /* Prevents line breaks */
 }
+
 
 .brand {
   color: #7D8295;
@@ -47,7 +49,7 @@ html, body {
 
 .get-started-button {
   margin-top: 30px;
-  padding: 10px 110px; /* Make the button wider */
+  padding: 10px 110px;
   background-color: #A0522D;
   color: white;
   border: none;

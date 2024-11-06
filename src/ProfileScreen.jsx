@@ -1,18 +1,27 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './ProfileScreen.css';
 
 export default function ProfileScreen() {
-  const location = useLocation(); // Get the current location
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Log out function
+  const handleLogout = () => {
+    // Clear any user session or authentication data here if needed
+    navigate('/login'); // Navigate to the login page
+  };
 
   return (
-    <div className="profile-wrapper">
+    <div className="dashboard-wrapper">
       {/* Sidebar */}
       <div className="sidebar">
+        {/* Brand Logo */}
         <div className="brand">
-          <h2 className="brand-text">Church Konek</h2>
+          <img src="./images/logo.png" alt="Church Konek Logo" className="logo" />
+          <h2 className="brand-text" style={{ fontSize: '20px' }}>Church Konek</h2>
         </div>
 
         <div className="menu-items">
@@ -47,6 +56,14 @@ export default function ProfileScreen() {
             <FontAwesomeIcon icon={faUser} className="menu-icon" />
             <span className="menu-text">Profile</span>
           </Link>
+        </div>
+
+        {/* Logout Button */}
+        <div className="menu-item logout-item" onClick={handleLogout}>
+          <span className="menu-link">
+            <FontAwesomeIcon icon={faSignOutAlt} className="menu-icon" />
+            <span className="menu-text">Log Out</span>
+          </span>
         </div>
       </div>
 
