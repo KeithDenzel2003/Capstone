@@ -22,6 +22,10 @@ export default function ProfileScreen() {
         <div className="brand">
           <img src="./images/logo.png" alt="Church Konek Logo" className="logo" />
           <h2 className="brand-text" style={{ fontSize: '20px' }}>Church Konek</h2>
+<<<<<<< HEAD
+=======
+
+>>>>>>> fbad524f01dcbbdd82f32d3a4a91e82d0722ab28
         </div>
 
         <div className="menu-items">

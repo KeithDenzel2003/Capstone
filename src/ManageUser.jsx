@@ -55,8 +55,15 @@ export default function ManageUser() {
         <div className="brand">
           <img src="./images/logo.png" alt="Church Konek Logo" className="logo" />
           <h2 className="brand-text" style={{ fontSize: '20px' }}>Church Konek</h2>
+<<<<<<< HEAD
         </div>
         
+=======
+
+        </div>
+        
+        {/* Menu Items */}
+>>>>>>> fbad524f01dcbbdd82f32d3a4a91e82d0722ab28
         <div className="menu-items">
           <div className={`menu-item ${location.pathname === '/dashboard' ? 'active' : ''}`}>
             <Link to="/dashboard" className="menu-link">
