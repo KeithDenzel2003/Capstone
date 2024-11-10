@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
+import { supabase } from './supabaseClient'; // Import Supabase client
 import './Dashboard.css';
 
 export default function Dashboard() {
   const location = useLocation(); // Get the current URL path
+  const [appointments, setAppointments] = useState([]); // State to store fetched appointments
+
+  // Fetch appointments from Supabase
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      const { data, error } = await supabase
+        .from('appointments') // Table name
+        .select('id, title, user_name') // Select relevant fields from the appointments table
+        .order('created_at', { ascending: false }); // Optional: order by created date, descending
+
+      if (error) {
+        console.error('Error fetching appointments:', error);
+      } else {
+        setAppointments(data); // Set appointments data to state
+      }
+    };
+
+    fetchAppointments();
+  }, []); // Run only once when the component mounts
 
   return (
     <div className="dashboard-wrapper">
@@ -15,7 +35,6 @@ export default function Dashboard() {
         <div className="brand">
           <img src="./images/logo.png" alt="Church Konek Logo" className="logo" />
           <h2 className="brand-text" style={{ fontSize: '20px' }}>Church Konek</h2>
-
         </div>
 
         {/* Menu Items */}
@@ -38,8 +57,6 @@ export default function Dashboard() {
               <span className="menu-text">Manage User</span>
             </Link>
           </div>
-
-          {/* Add the Send Alerts Link here */}
           <div className={`menu-item ${location.pathname === '/send-alert' ? 'active' : ''}`}>
             <Link to="/send-alert" className="menu-link">
               <FontAwesomeIcon icon={faBell} className="menu-icon" />
@@ -65,19 +82,17 @@ export default function Dashboard() {
         <div className="appointment-section">
           <div className="appointment-header">
             <FontAwesomeIcon icon={faCalendarAlt} className="appointment-icon" />
-            <span className="appointment-title">2 New Appointments</span>
+            <span className="appointment-title">{appointments.length} New Appointments</span>
           </div>
 
           {/* Appointment List */}
           <div className="appointment-list">
-            <div className="appointment-card">
-              <FontAwesomeIcon icon={faUser} className="card-icon" />
-              <span className="card-text">Francis Flancia - House Blessing</span>
-            </div>
-            <div className="appointment-card">
-              <FontAwesomeIcon icon={faUser} className="card-icon" />
-              <span className="card-text">Francis Flancia - Wedding</span>
-            </div>
+            {appointments.map((appointment) => (
+              <div className="appointment-card" key={appointment.id}>
+                <FontAwesomeIcon icon={faUser} className="card-icon" />
+                <span className="card-text">{appointment.user_name} - {appointment.title}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

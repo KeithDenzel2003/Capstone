@@ -2,24 +2,41 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './LoginScreen.css';
 import logo from '/images/logo.png';
+import { supabase } from './supabaseClient'; // Import supabase client
 
 export default function LoginScreen() {
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // Validation check: ensure name and password fields are not empty
-    if (!name || !password) {
-      alert('Please enter both name and password.');
+  const handleLogin = async () => {
+    // Validation check: ensure email and password fields are not empty
+    if (!email || !password) {
+      alert('Please enter both email and password.');
       return; // Stop the function from proceeding if fields are empty
     }
 
-    // If validation passes, proceed with login
-    console.log('Login button pressed');
-    console.log('Name:', name, 'Password:', password, 'Remember Me:', rememberMe);
-    navigate('/dashboard'); // Navigate to the dashboard page
+    try {
+      // Sign in with Supabase
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        alert('Error signing in: ' + error.message);
+        return;
+      }
+
+      // If login is successful, navigate to dashboard
+      console.log('Login successful');
+      console.log('User:', data.user);
+      navigate('/dashboard'); // Navigate to the dashboard page
+    } catch (error) {
+      console.error('Error logging in:', error.message);
+      alert('An error occurred while trying to log in.');
+    }
   };
 
   return (
@@ -30,10 +47,10 @@ export default function LoginScreen() {
       <div className="login-form">
         <input
           className="login-input"
-          type="text"
-          placeholder="NAME"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          type="email"
+          placeholder="EMAIL"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <input

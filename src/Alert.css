@@ -91,8 +91,10 @@
 .alert-list {
   display: flex;
   flex-direction: column;
-  gap: 5
-  px;
+  gap: 10px; /* Space between items */
+  overflow-y: auto; /* Make the alert list scrollable */
+  max-height: calc(100vh - 160px); /* Allow space for other components like search bar */
+  padding-right: 20px; /* Add space for the scrollbar */
 }
 
 /* Each alert item (user row) */
@@ -206,6 +208,8 @@
   width: 450px; /* Ensure modal width is balanced */
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
   position: relative; /* Positioning for close button */
+  max-height: 80vh; /* Limit the height of the modal */
+  overflow-y: auto; /* Make modal content scrollable if too long */
 }
 
 /* X Close button in the top-right corner */

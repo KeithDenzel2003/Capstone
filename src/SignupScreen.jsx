@@ -18,9 +18,10 @@ const Signup = () => {
       setMessage("Passwords don't match");
       return;
     }
-
-    const { error } = await supabase.auth.signUp({ email, password });
-
+  
+    // Sign up user with email and password
+    const { user, error } = await supabase.auth.signUp({ email, password, name });
+  
     if (error) {
       if (error.message.includes("rate limit exceeded")) {
         setMessage("Too many requests. Please wait a few minutes before trying again.");
@@ -32,12 +33,24 @@ const Signup = () => {
         setMessage(error.message);
       }
     } else {
-      setMessage("Sign-up successful! Please check your email to confirm.");
-      setTimeout(() => {
-        navigate('/login');
-      }, 2000); // Optional delay to show the message before redirect
+      // If sign-up successful, update the user's metadata with their name
+      const { error: updateError } = await supabase.auth.update({
+        data: {
+          name: name, // Update the user's name here
+        },
+      });
+  
+      if (updateError) {
+        setMessage("Error updating name: " + updateError.message);
+      } else {
+        setMessage("Sign-up successful! Please check your email to confirm.");
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000); // Optional delay to show the message before redirect
+      }
     }
   };
+  
 
   return (
     <div className="container">

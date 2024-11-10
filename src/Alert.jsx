@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom'; // React router for navigation
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser, faTimes } from '@fortawesome/free-solid-svg-icons'; // Added faTimes for X button
+import { supabase } from './supabaseClient'; // Import Supabase client
 import './Alert.css';
 
 export default function Alert() {
   const location = useLocation(); // Get the current path for active menu item highlighting
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState(""); // State to track the message input
+  const [users, setUsers] = useState([]); // State to hold user data
+  const [searchTerm, setSearchTerm] = useState(""); // State to hold the search term
 
   // Function to toggle modal visibility
   const toggleModal = () => {
@@ -25,17 +28,44 @@ export default function Alert() {
     setShowModal(false); // Close modal after sending
   };
 
+  // Fetch users from Supabase
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const { data, error } = await supabase.from('users').select('user_id, full_name, email');
+      if (error) {
+        console.error('Error fetching users:', error);
+      } else {
+        setUsers(data.map(user => ({
+          id: user.user_id,
+          name: user.full_name,
+          email: user.email
+        })));
+      }
+    };
+
+    fetchUsers();
+  }, []); // Empty dependency array to run only on component mount
+
+  // Filter users based on search term
+  const filteredUsers = users.filter(user => {
+    return user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+           user.email.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  // Function to handle search input change
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <div className="dashboard-wrapper">
       {/* Sidebar */}
       <div className="sidebar">
-        {/* Brand Logo */}
         <div className="brand">
           <img src="./images/logo.png" alt="Church Konek Logo" className="logo" />
           <h2 className="brand-text" style={{ fontSize: '20px' }}>Church Konek</h2>
-
         </div>
-        
+
         {/* Menu Items */}
         <div className="menu-items">
           <div className={`menu-item ${location.pathname === '/dashboard' ? 'active' : ''}`}>
@@ -64,7 +94,6 @@ export default function Alert() {
           </div>
         </div>
 
-        {/* Profile at the bottom */}
         <div className={`menu-item profile-item ${location.pathname === '/profile' ? 'active' : ''}`}>
           <Link to="/profile" className="menu-link">
             <FontAwesomeIcon icon={faUser} className="menu-icon" />
@@ -77,18 +106,24 @@ export default function Alert() {
       <div className="alert-page">
         {/* Search Bar */}
         <div className="search-bar">
-          <input type="text" placeholder="Search User" className="search-input" />
+          <input
+            type="text"
+            placeholder="Search User"
+            className="search-input"
+            value={searchTerm}
+            onChange={handleSearchChange} // Update search term on input change
+          />
         </div>
 
         {/* User Notification List */}
         <div className="alert-list">
-          {['Francis Flancia', 'Boyka', 'Lebron Jordan'].map((user, index) => (
+          {filteredUsers.map((user, index) => (
             <div className="alert-item" key={index}>
               <div className="user-info">
                 <FontAwesomeIcon icon={faUser} className="profile-icon" />
                 <div className="email-details">
-                  <h3 className="user-name">{user}</h3>
-                  <p className="user-email">{`${user.toLowerCase().replace(' ', '')}@gmail.com`}</p>
+                  <h3 className="user-name">{user.name}</h3>
+                  <p className="user-email">{user.email}</p>
                 </div>
               </div>
               <div className="user-role">USER</div>
