@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom'; // React router for navigation
+import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser, faTimes } from '@fortawesome/free-solid-svg-icons'; // Added faTimes for X button
+import { faThLarge, faCalendarAlt, faUserCog, faBell, faUser, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { supabase } from './supabaseClient'; // Import Supabase client
 import './Alert.css';
 
@@ -11,9 +11,11 @@ export default function Alert() {
   const [message, setMessage] = useState(""); // State to track the message input
   const [users, setUsers] = useState([]); // State to hold user data
   const [searchTerm, setSearchTerm] = useState(""); // State to hold the search term
+  const [selectedUser, setSelectedUser] = useState(null); // State to hold selected user for notification
 
   // Function to toggle modal visibility
-  const toggleModal = () => {
+  const toggleModal = (user) => {
+    setSelectedUser(user); // Set the selected user to send the notification to
     setShowModal(!showModal);
   };
 
@@ -23,9 +25,39 @@ export default function Alert() {
   };
 
   // Function to handle sending notification
-  const handleSendNotif = () => {
-    console.log("Message to send:", message); // You can replace this with the actual send logic
-    setShowModal(false); // Close modal after sending
+  const handleSendNotif = async () => {
+    if (!message || !selectedUser) {
+      alert("Please select a user and enter a message.");
+      return;
+    }
+
+    const recipientEmail = selectedUser.email;
+
+    try {
+      const response = await fetch('https://your-backend-url.com/send-notif', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: recipientEmail,
+          message: message,
+          subject: "New Notification from Church Konek",
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        alert("Notification sent successfully!");
+        setShowModal(false); // Close modal
+        setMessage(""); // Clear message field
+      } else {
+        alert("Failed to send notification.");
+      }
+    } catch (error) {
+      console.error("Error sending notification:", error);
+      alert("Error sending notification.");
+    }
   };
 
   // Fetch users from Supabase
@@ -127,7 +159,7 @@ export default function Alert() {
                 </div>
               </div>
               <div className="user-role">USER</div>
-              <button className="send-alert-btn" onClick={toggleModal}>SEND NOTIF</button>
+              <button className="send-alert-btn" onClick={() => toggleModal(user)}>SEND NOTIF</button>
             </div>
           ))}
         </div>
@@ -137,7 +169,7 @@ export default function Alert() {
           <div className="modal-overlay">
             <div className="modal-content">
               {/* X Close Button */}
-              <button className="close-btn" onClick={toggleModal}>
+              <button className="close-btn" onClick={() => setShowModal(false)}>
                 <FontAwesomeIcon icon={faTimes} />
               </button>
               <h2>SEND NOTIF</h2>
